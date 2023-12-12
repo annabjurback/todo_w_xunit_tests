@@ -4,6 +4,7 @@ namespace TodoApp
 	{
 		public static void Main(string[] args)
 		{
+			// comment
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
