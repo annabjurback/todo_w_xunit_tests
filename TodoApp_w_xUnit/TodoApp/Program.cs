@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TodoApp.Data;
+
 namespace TodoApp
 {
 	public class Program
@@ -9,6 +12,7 @@ namespace TodoApp
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
+			builder.Services.AddDbContext<TodoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 			var app = builder.Build();
 
