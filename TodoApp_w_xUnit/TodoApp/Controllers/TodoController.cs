@@ -6,7 +6,8 @@ namespace TodoApp.Controllers
     [ApiController]
     public class TodoController : Controller
     {
-        List<Todo> todos = new List<Todo>      
+        // sample data
+        List<Todo> _todos = new List<Todo>
         {
             new Todo
             {
@@ -22,11 +23,19 @@ namespace TodoApp.Controllers
                 IsDone = false
             }
         };
+        public TodoController()
+        {
+        }
+
+        public TodoController(List<Todo> todos)
+        {
+            _todos = todos;
+        }
 
         [HttpGet("/all")]
         public List<Todo> GetTodos()
         {
-            return todos;
+            return _todos;
         }
     }
 }
