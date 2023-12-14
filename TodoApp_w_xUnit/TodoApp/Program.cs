@@ -1,5 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using TodoApp.Data;
+//using Microsoft.EntityFrameworkCore;
 
 namespace TodoApp
 {
@@ -13,7 +12,7 @@ namespace TodoApp
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddRazorPages();
-			builder.Services.AddDbContext<TodoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			// NOTE: update localhost address below if necessary
 			builder.Services.AddHttpClient("BaseAddress", httpClient =>
 			{
 				if (builder.Environment.IsDevelopment())
@@ -31,13 +30,6 @@ namespace TodoApp
 
 			app.MapRazorPages();
 			app.MapControllers();
-
-			using (var scope = app.Services.CreateScope())
-			{
-				var services = scope.ServiceProvider;
-				var context = services.GetRequiredService<TodoContext>();
-				SampleData.CreateSampleData(context);
-			}
 
 			app.Run();
 		}

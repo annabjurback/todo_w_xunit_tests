@@ -1,25 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TodoApp.Data;
 using TodoApp.Models;
 
 namespace TodoApp.Controllers
 {
-	//[Route("/all")]
-	[ApiController]
-	public class TodoController : Controller
-	{
+    [ApiController]
+    public class TodoController : Controller
+    {
+        List<Todo> todos = new List<Todo>      
+        {
+            new Todo
+            {
+                Title = "Do first",
+                Description = "Tidy up",
+                IsDone = true
+            },
 
-		private readonly TodoContext _context;
+            new Todo
+            {
+                Title = "Do second",
+                Description = "Decorate for christmas",
+                IsDone = false
+            }
+        };
 
-		public TodoController(TodoContext context)
-		{
-			_context = context;
-		}
-
-		[HttpGet("/all")]
-		public List<Todo> GetTodos()
-		{
-			return _context.Todos.ToList();
-		}
-	}
+        [HttpGet("/all")]
+        public List<Todo> GetTodos()
+        {
+            return todos;
+        }
+    }
 }
