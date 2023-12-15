@@ -23,10 +23,11 @@ namespace TodoApp.Controllers
                 IsDone = false
             }
         };
+        // constructor only used for testing
         public TodoController()
         {
         }
-
+        // constructor only used for testing
         public TodoController(List<Todo> todos)
         {
             _todos = todos;
