@@ -7,30 +7,28 @@ namespace TodoApp.Controllers
     public class TodoController : Controller
     {
         // sample data
-        List<Todo> _todos = new List<Todo>
-        {
-            new Todo
-            {
-                Title = "Do first",
-                Description = "Tidy up",
-                IsDone = true
-            },
+        private List<Todo> _todos;
 
-            new Todo
-            {
-                Title = "Do second",
-                Description = "Decorate for christmas",
-                IsDone = false
-            }
-        };
-        // constructor only used for testing
+        //constructor only used for testing the GetTodos method
         public TodoController()
         {
-        }
-        // constructor only used for testing
-        public TodoController(List<Todo> todos)
-        {
-            _todos = todos;
+            _todos = new List<Todo>
+            {
+                new Todo
+                {
+                    Title = "Do first",
+                    Description = "Tidy up",
+                    IsDone = true
+                },
+
+                new Todo
+                {
+                    Title = "Do second",
+                    Description = "Decorate for christmas",
+                    IsDone = false
+                }
+            };
+
         }
 
         [HttpGet("/all")]
