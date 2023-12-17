@@ -6,35 +6,30 @@ namespace TodoApp.Controllers
     [ApiController]
     public class TodoController : Controller
     {
-        // sample data
-        private List<Todo> _todos;
+        private DataStorage _storage;
 
-        //constructor only used for testing the GetTodos method
-        public TodoController()
+        public TodoController(DataStorage storage)
         {
-            _todos = new List<Todo>
-            {
-                new Todo
-                {
-                    Title = "Do first",
-                    Description = "Tidy up",
-                    IsDone = true
-                },
-
-                new Todo
-                {
-                    Title = "Do second",
-                    Description = "Decorate for christmas",
-                    IsDone = false
-                }
-            };
-
+            _storage = storage;
         }
 
         [HttpGet("/all")]
         public List<Todo> GetTodos()
         {
-            return _todos;
+            return _storage.Todos;
+        }
+
+        [HttpPost("/add")]
+        public IActionResult PostTodo(string? title, string? description)
+        {
+            var todo = new Todo 
+            { 
+                Title = title, 
+                Description = description, 
+                IsDone = false
+            };
+            _storage.Todos.Add(todo);
+            return Ok(_storage.Todos);
         }
     }
 }
