@@ -22,14 +22,21 @@ namespace TodoApp.Controllers
         [HttpPost("/add")]
         public IActionResult PostTodo(string? title, string? description)
         {
-            var todo = new Todo 
-            { 
-                Title = title, 
-                Description = description, 
+
+            if (title == null && description == null)
+            {
+                // since two parameters were null, not throwing an exception
+                return BadRequest();
+            }
+            var todo = new Todo
+            {
+                Title = title,
+                Description = description,
                 IsDone = false
             };
             _storage.Todos.Add(todo);
-            return Ok(_storage.Todos);
+            return Ok();
+
         }
     }
 }
