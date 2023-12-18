@@ -19,9 +19,7 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: |
-        cd /TodoApp_w_xUnit
-        dotnet restore
+      run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
