@@ -1,4 +1,5 @@
 //using Microsoft.EntityFrameworkCore;
+using TodoApp.Models;
 
 namespace TodoApp
 {
@@ -9,6 +10,7 @@ namespace TodoApp
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
+			builder.Services.AddSingleton<DataStorage>();
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddRazorPages();

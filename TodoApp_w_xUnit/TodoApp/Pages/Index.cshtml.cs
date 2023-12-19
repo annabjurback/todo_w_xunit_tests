@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Runtime.InteropServices;
 using TodoApp.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TodoApp.Pages
 {
 	public class IndexModel : PageModel
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
-		public IndexModel(IHttpClientFactory httpClientFactory)
+
+        public IndexModel(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
@@ -21,13 +27,39 @@ namespace TodoApp.Pages
 
 			if (response.IsSuccessStatusCode)
 			{
-				Todos = await response.Content.ReadFromJsonAsync<List<Todo>>();
-			}
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Check if the content is not empty or null
+                if (!string.IsNullOrEmpty(content))
+                {
+                    Todos = JsonConvert.DeserializeObject<List<Todo>>(content);
+                }
+				else
+				{
+					// return empty list
+                    Todos = new List<Todo>();
+                }
+            }
 			else
 			{
-				// eller ska jag kasta ett exception här?
+				// return empty list
 				Todos = new List<Todo>();
 			}
+		}
+	
+		public async Task<IActionResult> OnPostTodo(string? title, string? description)
+		{
+			var query = new Dictionary<string, string?>
+			{
+				["title"] = title,
+				["description"] = description
+			};
+
+			var uri = QueryHelpers.AddQueryString("/add", query);
+			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
+			var response = await httpClient.PostAsync(uri, null);
+
+			return RedirectToPage();
 		}
 	}
 }

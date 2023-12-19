@@ -6,6 +6,12 @@
 
 <div class="text-center">
     <h1 class="display-4">Todos</h1>
+    <form method="post"
+        asp-page-handler="Todo">
+        <input type="text" placeholder="Title" name="title" />
+        <input type="text" placeholder="Enter your next Todo" name="description" />
+        <button type="submit">Submit Todo</button>
+    </form>
     @foreach (var item in Model.Todos)
     {
         <h2>@item.Title</h2>
