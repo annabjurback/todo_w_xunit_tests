@@ -61,5 +61,14 @@ namespace TodoApp.Pages
 
 			return RedirectToPage();
 		}
+
+		public async Task<IActionResult> OnDeleteTodo(int id)
+		{
+			var uri = "/delete?id=" + id;
+			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
+			var response = await httpClient.DeleteAsync(uri);
+
+			return RedirectToPage();
+		}
 	}
 }
