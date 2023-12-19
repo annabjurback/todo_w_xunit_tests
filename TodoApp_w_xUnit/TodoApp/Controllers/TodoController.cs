@@ -30,6 +30,7 @@ namespace TodoApp.Controllers
             }
             var todo = new Todo
             {
+                ID = _storage.SetNextId(),
                 Title = title,
                 Description = description,
                 IsDone = false

@@ -10,7 +10,6 @@ namespace TodoApp.Tests
         public void ShouldReturn_Ok_And_StorageShouldHave_ListWithSameData_As_Request()
         {
             //Arrange
-            Todo.nextId = 0;
             var _storage = new DataStorage();
             var _controller = new TodoController(_storage);
             string title = "Title";
@@ -32,7 +31,6 @@ namespace TodoApp.Tests
         public void ShouldReturn_Ok_And_StorageShouldHaveListOfTodos_With_ConsecutiveIds()
         {
             //Arrange
-            Todo.nextId = 0; //eller skriv en metod i Todo som heter ResetnextID().. typ
             var _storage = new DataStorage();
             var _controller = new TodoController(_storage);
             string title = "title";
@@ -60,7 +58,6 @@ namespace TodoApp.Tests
         public void ShouldReturn_BadRequest_And_StorageShouldOnlyContainOneItem_If_ParametersOfSecondPostRequest_Are_Null()
         {
             // Arrange
-            Todo.nextId = 0;
             var _storage = new DataStorage();
             var _controller = new TodoController(_storage);
             string title1 = "title";

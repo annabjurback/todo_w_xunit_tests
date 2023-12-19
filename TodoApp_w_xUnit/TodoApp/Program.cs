@@ -11,7 +11,7 @@ namespace TodoApp
 
 			// Add services to the container.
 			builder.Services.AddSingleton<DataStorage>();
-            builder.Services.AddControllers();
+			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddRazorPages();
 			// NOTE: update localhost address below if necessary
