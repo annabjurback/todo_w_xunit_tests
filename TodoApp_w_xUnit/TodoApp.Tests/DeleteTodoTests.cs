@@ -26,8 +26,6 @@ namespace TodoApp.Tests
             var result = response as StatusCodeResult;
             Assert.Equal(200, result!.StatusCode);
             Assert.Equal(x-1, storage.Todos.Count);
-
-
         }
     }
 }

@@ -62,11 +62,11 @@ namespace TodoApp.Pages
 			return RedirectToPage();
 		}
 
-		public async Task<IActionResult> OnDeleteTodo(int id)
+		public async Task<IActionResult> OnPostDelete(int id)
 		{
 			var uri = "/delete?id=" + id;
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
-			var response = await httpClient.DeleteAsync(uri);
+			var response = await httpClient.PostAsync(uri, null);
 
 			return RedirectToPage();
 		}
