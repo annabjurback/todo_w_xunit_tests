@@ -37,7 +37,30 @@ namespace TodoApp.Controllers
             };
             _storage.Todos.Add(todo);
             return Ok();
-
         }
+
+        [HttpPost("/delete")]
+        public IActionResult DeleteTodo(string id)
+        {
+            if(id is null)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                try
+                {
+                    int idToDelete = Convert.ToInt32(id);
+                    var todoToRemove = _storage.Todos.Single(x => x.ID == idToDelete);
+                    _storage.Todos.Remove(todoToRemove);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+            }
+            return Ok();
+        }
+
     }
 }

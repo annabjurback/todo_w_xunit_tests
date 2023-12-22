@@ -12,8 +12,7 @@
         
         public int SetNextId()
         {
-            nextId++;
-            return nextId;
+            return ++nextId;
         }
     }
 }
