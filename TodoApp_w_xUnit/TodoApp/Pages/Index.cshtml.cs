@@ -70,5 +70,13 @@ namespace TodoApp.Pages
 
 			return RedirectToPage();
 		}
+		
+		public async Task<IActionResult> OnPostIsDoneStatus(int id)
+		{
+			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
+			var uri = "/invertisdonebool" + id;
+			var response = await httpClient.PostAsync(uri, null);
+			return RedirectToPage();
+		}
 	}
 }
