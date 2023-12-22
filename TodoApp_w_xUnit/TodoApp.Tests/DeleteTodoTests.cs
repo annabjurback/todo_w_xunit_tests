@@ -55,5 +55,21 @@ namespace TodoApp.Tests
 			var result = response as StatusCodeResult;
 			Assert.Equal(400, result!.StatusCode);
 		}
+
+		[Fact]
+		public void ShouldReturn_BadRequest_If_RequestParam_Int_DoesntExistInList()
+		{
+			// Arrange
+			var storage = new DataStorage();
+			var controller = new TodoController(storage);
+			controller.PostTodo(title, null);
+
+			//Act
+			var response = controller.DeleteTodo("3");
+
+			// Assert
+			var result = response as StatusCodeResult;
+			Assert.Equal(400, result!.StatusCode);
+		}
 	}
 }
