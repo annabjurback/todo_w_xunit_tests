@@ -62,5 +62,29 @@ namespace TodoApp.Controllers
             return Ok();
         }
 
+        [HttpPost("/invertisdonebool")]
+        public IActionResult EditIsDoneStatus(string id)
+        {
+			if (id is null)
+			{
+				throw new ArgumentNullException();
+			}
+			else
+			{
+				try
+				{
+					int idToUpdate = Convert.ToInt32(id);
+					var todoToUpdate = _storage.Todos.Single(x => x.ID == idToUpdate);
+                    todoToUpdate.IsDone = !todoToUpdate.IsDone;
+
+				}
+				catch
+				{
+					return BadRequest();
+				}
+			}
+			return Ok();
+		}
+
     }
 }
