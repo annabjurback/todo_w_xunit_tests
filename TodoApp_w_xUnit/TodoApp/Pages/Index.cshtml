@@ -15,20 +15,30 @@
 	@foreach (var item in Model.Todos)
 	{
 		string isDoneText = item.IsDone ? "Done" : "To do";
-		<form method="post"
-		asp-page-handler="IsDoneStatus"
-		asp-route-id="@item.ID">
-			<button type="submit">
-				@isDoneText
-			  </button>
-		</form>
-		<h2>@item.Title</h2>
-		<p>@item.Description</p>
-		<form method="post"
-			  asp-page-handler="Delete"
-			  asp-route-id="@item.ID">
-			<button type="submit">Delete</button>
-		</form>
+		string isDoneClass = item.IsDone ? "btn-success" : "btn-warning";
+			<div class="row">
+				<div class="col align-middle">
+					<form method="post"
+						  asp-page-handler="IsDoneStatus"
+						  asp-route-id="@item.ID">
+						<button type="submit" class=@isDoneClass>
+							@isDoneText
+						</button>
+					</form>
+				</div>
+				<div class="col-8">
+					<h2>@item.Title</h2>
+					<p>@item.Description</p>
+				</div>
+				<div class="col">
+					<form method="post"
+						  asp-page-handler="Delete"
+						  asp-route-id="@item.ID">
+						<button type="submit" class="btn btn-danger">Delete</button>
+					</form>
+				</div>
+			</div>
+
 	}
 
 </div>
