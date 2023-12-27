@@ -86,5 +86,29 @@ namespace TodoApp.Controllers
 			return Ok();
 		}
 
-    }
+        public IActionResult EditTodo(string idToUpdate, string newTitle, string newDescription)
+        {
+            {
+                if (idToUpdate is null || (newTitle is null && newDescription is null))
+                {
+                    throw new ArgumentNullException();
+                }
+                else
+                {
+                    try
+                    {
+                        int id = Convert.ToInt32(idToUpdate);
+                        var todoToUpdate = _storage.Todos.Single(x => x.ID == id);
+                        todoToUpdate.Title = newTitle;
+                        todoToUpdate.Description = newDescription;
+                    }
+                    catch
+                    {
+                        return BadRequest();
+                    }
+                }
+                return Ok();
+            }
+        }
+	}
 }
