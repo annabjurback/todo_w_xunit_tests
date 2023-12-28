@@ -34,11 +34,11 @@
 						  asp-route-id="@item.ID">
 						<div class="row">
 							<div class="col">
-								<input type="text" value=@item.Title name="title" />
-								<input type="text" value=@item.Description name="description" />
+								<input type="text" value="@item.Title" name="title" />
+								<input type="text" value="@item.Description" name="description" />
 							</div>
 							<div class="col align-self-center">
-								<button type="submit" class="btn btn-sm btn-info">Save</button>
+								<button type="submit" class="btn btn-info">Save</button>
 							</div>
 						</div>
 
@@ -55,9 +55,9 @@
 						<div class="col align-self-center">
 							<form method="get">
 								<input type="hidden"
-									   name="id"
+									   name="idToEdit"
 									   value="@item.ID">
-								<button type="submit" class="btn btn-sm btn-light">Edit</button>
+								<button type="submit" class="btn btn-light">Edit</button>
 							</form>
 						</div>
 					</div>

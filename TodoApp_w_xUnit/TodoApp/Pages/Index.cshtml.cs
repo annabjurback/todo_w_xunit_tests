@@ -22,7 +22,7 @@ namespace TodoApp.Pages
 
 		public int IdToEdit { get; set; }
 
-		public async Task OnGetAsync(int? id)
+		public async Task OnGetAsync(int? idToEdit)
 		{
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
 			var response = await httpClient.GetAsync("/all");
@@ -36,7 +36,7 @@ namespace TodoApp.Pages
                 {
                     Todos = JsonConvert.DeserializeObject<List<Todo>>(content);
 					
-					IdToEdit = id ?? -1;
+					IdToEdit = idToEdit ?? -1;
 				}
 				else
 				{
