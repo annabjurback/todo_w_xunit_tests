@@ -86,10 +86,11 @@ namespace TodoApp.Controllers
 			return Ok();
 		}
 
-        public IActionResult EditTodo(string idToUpdate, string newTitle, string newDescription)
+        [HttpPost("/edit")]
+        public IActionResult EditTodo(string id, string title, string description)
         {
             {
-                if (idToUpdate is null || (newTitle is null && newDescription is null))
+                if (id is null || (title is null && description is null))
                 {
                     throw new ArgumentNullException();
                 }
@@ -97,10 +98,9 @@ namespace TodoApp.Controllers
                 {
                     try
                     {
-                        int id = Convert.ToInt32(idToUpdate);
-                        var todoToUpdate = _storage.Todos.Single(x => x.ID == id);
-                        todoToUpdate.Title = newTitle;
-                        todoToUpdate.Description = newDescription;
+                        var todoToUpdate = _storage.Todos.Single(x => x.ID == Convert.ToInt32(id));
+                        todoToUpdate.Title = title;
+                        todoToUpdate.Description = description;
                     }
                     catch
                     {

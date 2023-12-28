@@ -10,34 +10,68 @@
 		  asp-page-handler="Todo">
 		<input type="text" placeholder="Title" name="title" />
 		<input type="text" placeholder="Enter your next Todo" name="description" />
-		<button type="submit">Submit Todo</button>
+		<button type="submit" class="btn btn-primary btn-sm">Submit Todo</button>
 	</form>
 	@foreach (var item in Model.Todos)
 	{
 		string isDoneText = item.IsDone ? "Done" : "To do";
-		string isDoneClass = item.IsDone ? "btn-success" : "btn-warning";
-			<div class="row">
-				<div class="col align-middle">
-					<form method="post"
-						  asp-page-handler="IsDoneStatus"
-						  asp-route-id="@item.ID">
-						<button type="submit" class=@isDoneClass>
-							@isDoneText
-						</button>
-					</form>
-				</div>
-				<div class="col-8">
-					<h2>@item.Title</h2>
-					<p>@item.Description</p>
-				</div>
-				<div class="col">
-					<form method="post"
-						  asp-page-handler="Delete"
-						  asp-route-id="@item.ID">
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>
-				</div>
+		string isDoneClass = item.IsDone ? "btn btn-success" : "btn btn-warning";
+		<div class="row">
+			<div class="col align-self-center">
+				<form method="post"
+					  asp-page-handler="IsDoneStatus"
+					  asp-route-id="@item.ID">
+					<button type="submit" class="@isDoneClass">
+						@isDoneText
+					</button>
+				</form>
 			</div>
+			<div class="col-8 align-self-center">
+				@if (item.ID == Model.IdToEdit)
+				{
+					<form method="post"
+						  asp-page-handler="Edit"
+						  asp-route-id="@item.ID">
+						<div class="row">
+							<div class="col">
+								<input type="text" value=@item.Title name="title" />
+								<input type="text" value=@item.Description name="description" />
+							</div>
+							<div class="col align-self-center">
+								<button type="submit" class="btn btn-sm btn-info">Save</button>
+							</div>
+						</div>
+
+					</form>
+
+				}
+				else
+				{
+					<div class="row">
+						<div class="col">
+							<p><strong>@item.Title</strong></p>
+							<p>@item.Description</p>
+						</div>
+						<div class="col align-self-center">
+							<form method="get">
+								<input type="hidden"
+									   name="id"
+									   value="@item.ID">
+								<button type="submit" class="btn btn-sm btn-light">Edit</button>
+							</form>
+						</div>
+					</div>
+
+				}
+			</div>
+			<div class="col align-self-center">
+				<form method="post"
+					  asp-page-handler="Delete"
+					  asp-route-id="@item.ID">
+					<button type="submit" class="btn btn-danger">Delete</button>
+				</form>
+			</div>
+		</div>
 
 	}
 

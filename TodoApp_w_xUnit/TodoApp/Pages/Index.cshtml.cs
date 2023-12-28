@@ -20,7 +20,9 @@ namespace TodoApp.Pages
 
 		public List<Todo> Todos { get; set; }
 
-		public async Task OnGetAsync()
+		public int IdToEdit { get; set; }
+
+		public async Task OnGetAsync(int? id)
 		{
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
 			var response = await httpClient.GetAsync("/all");
@@ -33,7 +35,9 @@ namespace TodoApp.Pages
                 if (!string.IsNullOrEmpty(content))
                 {
                     Todos = JsonConvert.DeserializeObject<List<Todo>>(content);
-                }
+					
+					IdToEdit = id ?? -1;
+				}
 				else
 				{
 					// return empty list
@@ -74,6 +78,22 @@ namespace TodoApp.Pages
 		public async Task<IActionResult> OnPostIsDoneStatus(int id)
 		{
 			var uri = "/invertisdonebool?id=" + id;
+			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
+			var response = await httpClient.PostAsync(uri, null);
+
+			return RedirectToPage();
+		}
+
+		public async Task<IActionResult> OnPostEdit(string id, string? title, string? description)
+		{
+			var query = new Dictionary<string, string?>
+			{
+				["id"] = id,
+				["title"] = title,
+				["description"] = description
+			};
+
+			var uri = QueryHelpers.AddQueryString("/edit", query);
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
 			var response = await httpClient.PostAsync(uri, null);
 
