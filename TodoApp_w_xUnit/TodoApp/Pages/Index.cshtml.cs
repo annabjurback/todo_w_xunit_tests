@@ -61,7 +61,7 @@ namespace TodoApp.Pages
 
 			var uri = QueryHelpers.AddQueryString("/add", query);
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
-			var response = await httpClient.PostAsync(uri, null);
+			await httpClient.PostAsync(uri, null);
 
 			return RedirectToPage();
 		}
@@ -70,7 +70,7 @@ namespace TodoApp.Pages
 		{
 			var uri = "/delete?id=" + id;
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
-			var response = await httpClient.PostAsync(uri, null);
+			await httpClient.PostAsync(uri, null);
 
 			return RedirectToPage();
 		}
@@ -79,7 +79,7 @@ namespace TodoApp.Pages
 		{
 			var uri = "/invertisdonebool?id=" + id;
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
-			var response = await httpClient.PostAsync(uri, null);
+			await httpClient.PostAsync(uri, null);
 
 			return RedirectToPage();
 		}
@@ -95,7 +95,7 @@ namespace TodoApp.Pages
 
 			var uri = QueryHelpers.AddQueryString("/edit", query);
 			var httpClient = _httpClientFactory.CreateClient("BaseAddress");
-			var response = await httpClient.PostAsync(uri, null);
+			await httpClient.PostAsync(uri, null);
 
 			return RedirectToPage();
 		}

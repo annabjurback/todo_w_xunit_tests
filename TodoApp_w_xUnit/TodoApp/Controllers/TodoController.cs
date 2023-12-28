@@ -44,7 +44,7 @@ namespace TodoApp.Controllers
         {
             if(id is null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(id);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace TodoApp.Controllers
         {
 			if (id is null)
 			{
-				throw new ArgumentNullException();
+				throw new ArgumentNullException(id);
 			}
 			else
 			{
