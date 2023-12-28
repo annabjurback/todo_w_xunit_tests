@@ -10,7 +10,7 @@
             Todos = new List<Todo>();
         }
         
-        public int SetNextId()
+        public int GetNextId()
         {
             return ++nextId;
         }
